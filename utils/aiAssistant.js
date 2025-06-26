@@ -1,6 +1,6 @@
-import axios from 'axios';
+const axios = require('axios');
 
-export const getAIResponse = async (message) => {
+ const getAIResponse = async (message) => {
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -25,3 +25,5 @@ export const getAIResponse = async (message) => {
     return 'Sorry, an error occurred while generating a response.';
   }
 };
+
+module.exports = {getAIResponse}

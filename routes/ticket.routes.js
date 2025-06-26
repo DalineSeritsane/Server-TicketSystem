@@ -1,8 +1,8 @@
-import express from 'express';
-import { submitTicket } from '../controllers/ticket.controller.js';
-import { getAllTickets, updateTicketStatus, getTicketStats } from '../controllers/ticket.admin.controller.js';
-import authMiddleware from '../middlewares/auth.js';
-import adminMiddleware from '../middlewares/admin.js';
+const express = require('express');
+const { submitTicket } = require ('../controllers/ticket.controller');
+const { getAllTickets, updateTicketStatus, getTicketStats } = require('../controllers/ticket.admin.controller');
+const  authMiddleware = require ('../middlewares/auth');
+const adminMiddleware = require ('../middlewares/admin');
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get('/admin', authMiddleware, adminMiddleware, getAllTickets);
 router.put('/admin/:ticketId', authMiddleware, adminMiddleware, updateTicketStatus);
 router.get('/admin/stats', authMiddleware, adminMiddleware, getTicketStats);
 
-export default router;
+module.exports =  router

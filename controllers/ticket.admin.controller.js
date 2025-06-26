@@ -1,6 +1,6 @@
-import Ticket from '../model/tickets.js';
+const Ticket = require ('../models/tickets');
 
-export const getAllTickets = async (req, res) => {
+ const getAllTickets = async (req, res) => {
   try {
     const tickets = await Ticket.find().sort({ createdAt: -1 });
     res.json(tickets);
@@ -9,7 +9,7 @@ export const getAllTickets = async (req, res) => {
   }
 };
 
-export const updateTicketStatus = async (req, res) => {
+ const updateTicketStatus = async (req, res) => {
   try {
     const { ticketId } = req.params;
     const { status, response } = req.body;
@@ -25,7 +25,7 @@ export const updateTicketStatus = async (req, res) => {
   }
 };
 
-export const getTicketStats = async (req, res) => {
+ const getTicketStats = async (req, res) => {
   try {
     const total = await Ticket.countDocuments();
     const open = await Ticket.countDocuments({ status: 'open' });
@@ -36,4 +36,10 @@ export const getTicketStats = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+module.exports = {
+  getAllTickets,
+  updateTicketStatus,
+  getTicketStats
 };
