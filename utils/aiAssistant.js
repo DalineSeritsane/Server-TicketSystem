@@ -3,21 +3,25 @@ import axios from 'axios';
 export const getAIResponse = async (message) => {
   try {
     const response = await axios.post(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
+      'https://api.openai.com/v1/chat/completions',
       {
-        contents: [{ role: 'user', parts: [{ text: message }] }],
+        model: 'gpt-3.5-turbo', 
+        messages: [
+          { role: 'user', content: message }
+        ],
+        temperature: 0.7,
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-goog-api-key': process.env.GEMINI_API_KEY,
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         },
       }
     );
 
-    return response.data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
+    return response.data.choices?.[0]?.message?.content || 'No response';
   } catch (error) {
-    console.error('Gemini API Error:', error.message);
+    console.error('OpenAI API Error:', error.message);
     return 'Sorry, an error occurred while generating a response.';
   }
 };
