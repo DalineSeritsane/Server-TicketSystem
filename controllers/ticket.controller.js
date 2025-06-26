@@ -1,4 +1,4 @@
-import Ticket from '../models/Ticket.js';
+import Ticket from '../models/ticket.js';
 import { getAIResponse } from '../utils/aiAssistant.js';
 export const submitTicket = async (req, res) => {
   const { message } = req.body;
