@@ -19,6 +19,7 @@ const axios = require('axios');
       }
     );
 
+
     return response.data.choices?.[0]?.message?.content || 'No response';
   } catch (error) {
     console.error('OpenAI API Error:', error.message);
